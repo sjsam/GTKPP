@@ -1,0 +1,31 @@
+#!/bin/bash
+# Author:Sajith John Sam <sjsam@tangledweb.in>
+# This is a bash wrapper to compile files dealing with gtk+/gtkmm 
+# Command Syntax :
+
+   gtkpp filename.cpp/filename.c outputfilename
+
+# For filename.c the above command does exactly what the below command does:
+# gcc filename.c -o filename `pkg-config gtk+-3.0 --cflags --libs`
+
+# Verification of the command line arguments and compilation happens below.
+
+if [ $# -ne 2 ]
+then
+ if [[ $1 == *.c ]]
+  then
+   gcc $1 -o $2 `pkg-config gtk+-3.0 --cflags --libs`
+ elif [[ $1 == *.cpp ]]
+  then
+   g++ $1 -o $2 `pkg-config gtkmm-3.0 --cflags --libs`
+ else
+   echo "gtkpp : Usage error"
+   echo "gtkpp expects two arguments, your .c/.cpp file and the output file"
+   echo "eg : gtkpp example.c example" 
+ fi
+else
+ echo "gtkpp : Usage error"
+ echo "gtkpp expects two arguments, your .c/.cpp file and the output file"
+ echo "eg : gtkpp example.cpp example"
+fi
+
