@@ -14,10 +14,10 @@ if [ $# -ne 2 ]
 then
  if [[ $1 == *.c ]]
   then
-   gcc $1 -o $2 `pkg-config gtk+-3.0 --cflags --libs`
+   gcc "$1" -o "$2" "$(pkg-config gtk+-3.0 --cflags --libs)"
  elif [[ $1 == *.cpp ]]
   then
-   g++ $1 -o $2 `pkg-config gtkmm-3.0 --cflags --libs`
+   g++ "$1" -o "$2" "$(pkg-config gtkmm-3.0 --cflags --libs)"
  else
    echo "gtkpp : Usage error"
    echo "gtkpp expects two arguments, your .c/.cpp file and the output file"
